@@ -21,23 +21,14 @@ modules:
 
   - type: dnf
     repos:
-      # Активируем репозиторий RPM Fusion (Nonfree)
-      nonfree:
-        - rpmfusion
+      cleanup: true
+      nonfree: rpmfusion
       #copr:
       #  - atim/starship
-      # Подключаем официальный RPM-репозиторий Brave
-      external:
+      files:
+        # Подключаем официальный RPM-репозиторий Brave
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-        #- https://packages.microsoft.com/yumrepos/vscode/config.repo
-      # Вместо внешней ссылки мы явно скармливаем BlueBuild параметры из этого файла
-      inline:
-        - id: vscode
-          name: Visual Studio Code
-          baseurl: https://packages.microsoft.com/yumrepos/vscode
-          enabled: true
-          gpgcheck: true
-          gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+        - https://packages.microsoft.com/yumrepos/vscode/config.repo
     install:
       packages:
         #- micro
@@ -66,8 +57,9 @@ modules:
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
         scope: system
+        install: []
         # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
+        #install: # system flatpaks we want all users to have and not remove
           #- org.mozilla.firefox
           #- org.gnome.Loupe
       - scope: user # Also add Flathub user repo, but no user packages
