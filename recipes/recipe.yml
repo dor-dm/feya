@@ -19,6 +19,13 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+  # Превентивный фикс известного бага (#119 blue-build/cli) с заменой ядра —
+  # ставим ДО того, как dnf-модуль заменит ядро
+  - type: script
+    snippets:
+      - mkdir -p /usr/lib/kernel/install.conf.d
+      - echo "layout=ostree" > /usr/lib/kernel/install.conf.d/00-kernel-layout.conf
+
   - type: dnf
     repos:
       cleanup: true
