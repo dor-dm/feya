@@ -59,7 +59,8 @@ modules:
         #- hollywood # заставка Эмуляция бурной деятельности (rpm пакет не найден)
         - kate # улучшенный текстовый редактор KDE
         - kernel-cachyos # Так как мы подключили COPR выше, DNF сам возьмет эти пакеты оттуда # For GCC built kernels
-        - kernel-cachyos-devel-matched # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA # For GCC built kernels
+        - kernel-cachyos-devel
+        #- kernel-cachyos-devel-matched # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA # For GCC built kernels
         - kcalc
         - keepassxc
         #- kio-extras # для открытия Samba в Dolphin (уже есть)
