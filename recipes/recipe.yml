@@ -42,6 +42,7 @@ modules:
 
     install:
       packages:
+        - akmod-nvidia
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
         - brave-origin
@@ -123,8 +124,8 @@ modules:
     base: main # main: stock Fedora kernel / main and nvidia images; bazzite: Bazzite’s kernel / bazzite images
     install:
       - nvidia
-    nvidia-driver: nvidia
-    #nvidia-driver: nvidia-open # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
+    #nvidia-driver: nvidia
+    nvidia-driver: nvidia-open # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
 
   #- type: initramfs # сразу после dnf, после манипуляций с ядром
   #- type: script
