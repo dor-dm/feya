@@ -31,7 +31,7 @@ modules:
       cleanup: true
       nonfree: rpmfusion
       copr:
-        #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
+        - bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
         - bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
         - lihaohong/yazi
       #  - atim/starship
@@ -124,9 +124,9 @@ modules:
   - type: script
     snippets:
       #- setsebool -P domain_kernel_load_modules on
-      - akmods --force
+      #- akmods --force
 
-  - type: default-flatpaks
+  - type: default-flatpaks #@v2
     configurations:
       - scope: system
         notify: true # Send notification after install/uninstall is finished (true/false)
