@@ -31,8 +31,8 @@ modules:
       cleanup: true
       nonfree: rpmfusion
       copr:
-        - bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
-        - bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
+        #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
+        #- bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
         - lihaohong/yazi
       #  - atim/starship
       files:
@@ -41,8 +41,6 @@ modules:
 
     install:
       packages:
-        #- akmod-nvidia # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
-        - akmod-nvidia-open
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
         - brave-origin
@@ -86,16 +84,16 @@ modules:
         - p7zip-plugins # для работы с 7zip архивами
         - qbittorrent
         #- samba-client # набор CLI-утилит для Samba (уже есть)
-        - scx-scheds # CachyOS sched-ext
-        - scx-tools # CachyOS sched-ext
-        - scx-manager # чтобы переключать планировщики CachyOS через GUI
+        #- scx-scheds # CachyOS sched-ext
+        #- scx-tools # CachyOS sched-ext
+        #- scx-manager # чтобы переключать планировщики CachyOS через GUI
         #- starship
         - steam
         - steam-devices # Крайне важный пакет: драйверы и правила для геймпадов (DualShock/DualSense/Xbox)
         - thunderbird
         - tldr # справка по командам Linux
         #- tree # для древовидного вывода папок (уже есть)
-        - uksmd # Автоматическая дедупликация памяти от команды CachyOS
+        #- uksmd # Автоматическая дедупликация памяти от команды CachyOS
         - unrar # для распаковки RAR архивов
         #- unzip # (уже есть)
         #- vi # (уже есть)
@@ -119,6 +117,10 @@ modules:
         # - kernel-modules
         # - kernel-modules-core
         # - kernel-modules-extra
+
+
+  - type: akmods
+    nvidia-driver: nvidia-open # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
 
   #- type: initramfs # сразу после dnf, после манипуляций с ядром
   #- type: script
