@@ -31,15 +31,6 @@ modules:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
         - https://packages.microsoft.com/yumrepos/vscode/config.repo
 
-    # ОПЕРАЦИЯ ЗАМЕНЫ ЯДРА (Происходит атомарно во время сборки образа)
-    replace:
-      from-repo: copr:copr.fedorainfracloud.org:bieszczaders:kernel-cachyos
-      packages:
-        - kernel
-        - kernel-core
-        - kernel-modules
-        - kernel-modules-core
-        - kernel-modules-extra
     install:
       packages:
         # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
@@ -69,8 +60,8 @@ modules:
         - hello
         #- hollywood # заставка Эмуляция бурной деятельности (rpm пакет не найден)
         - kate # улучшенный текстовый редактор KDE
-        - kernel-cachyos # Так как мы подключили COPR выше, DNF сам возьмет эти пакеты оттуда
-        - kernel-cachyos-devel # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA
+        - kernel-cachyos # Так как мы подключили COPR выше, DNF сам возьмет эти пакеты оттуда # For GCC built kernels
+        - kernel-cachyos-devel # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA # For GCC built kernels
         - kcalc
         - keepassxc
         #- kio-extras # для открытия Samba в Dolphin (уже есть)
@@ -108,6 +99,14 @@ modules:
         # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+        # ОПЕРАЦИЯ ЗАМЕНЫ ЯДРА (Происходит атомарно во время сборки образа)
+        - kernel
+        - kernel-core
+        - kernel-modules
+        - kernel-modules-core
+        - kernel-modules-extra
+
+  - type: initramfs
 
   - type: default-flatpaks
     configurations:
