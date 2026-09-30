@@ -34,7 +34,7 @@ modules:
 
     install:
       packages:
-        - akmod-nvidia # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
+        #- akmod-nvidia # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
         #- akmod-nvidia-open
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
@@ -59,8 +59,7 @@ modules:
         #- hollywood # заставка Эмуляция бурной деятельности (rpm пакет не найден)
         - kate # улучшенный текстовый редактор KDE
         - kernel-cachyos # Так как мы подключили COPR выше, DNF сам возьмет эти пакеты оттуда # For GCC built kernels
-        - kernel-cachyos-devel
-        #- kernel-cachyos-devel-matched # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA # For GCC built kernels
+        - kernel-cachyos-devel-matched # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA # For GCC built kernels
         - kcalc
         - keepassxc
         #- kio-extras # для открытия Samba в Dolphin (уже есть)
@@ -95,10 +94,10 @@ modules:
         #- vi # (уже есть)
         - vkBasalt.x86_64 # vkBasalt версия для современных 64-битных игр и программ (для rpm версий лаунчеров)
         - vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
-        - xorg-x11-drv-nvidia-libs.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
-        - xorg-x11-drv-nvidia-cuda # компоненты официального драйвера NVIDIA и технологии CUDA
-        # No match for argument: xorg-x11-drv-nvidia-cuda.i686
-        #- xorg-x11-drv-nvidia-cuda.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
+        #- xorg-x11-drv-nvidia-libs.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
+        #- xorg-x11-drv-nvidia-cuda # компоненты официального драйвера NVIDIA и технологии CUDA
+        ## No match for argument: xorg-x11-drv-nvidia-cuda.i686
+        ##- xorg-x11-drv-nvidia-cuda.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
         - yazi # файловый менеджер на Rust
         #- zip # (уже есть)
     remove:
