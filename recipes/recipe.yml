@@ -123,7 +123,8 @@ modules:
     base: main # main: stock Fedora kernel / main and nvidia images; bazzite: Bazzite’s kernel / bazzite images
     install:
       - nvidia
-    nvidia-driver: nvidia-open # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
+    nvidia-driver: nvidia
+    #nvidia-driver: nvidia-open # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
 
   #- type: initramfs # сразу после dnf, после манипуляций с ядром
   #- type: script
@@ -153,6 +154,7 @@ modules:
         install:
           - com.ranfdev.DistroShelf # DistroShelf для управления Distrobox контейнерами
           - org.jeffvli.feishin # аудио плеер под стриминг
+          - org.filezillaproject.Filezilla
           - com.github.tchx84.Flatseal # Flatseal для управления разрешениями Flatpak
           - it.mijorus.gearlever # Gear Lever для управления AppImages
           - com.heroicgameslauncher.hgl # Heroic Games Launcher
