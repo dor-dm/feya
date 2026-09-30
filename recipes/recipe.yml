@@ -31,9 +31,9 @@ modules:
       cleanup: true
       nonfree: rpmfusion
       copr:
+        - bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
+        - bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
         - lihaohong/yazi
-        #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
-        #- bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
         #  - atim/starship
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
