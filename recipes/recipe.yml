@@ -43,7 +43,7 @@ modules:
         - bat # вместо cat
         - brave-origin
         - btop
-        - cachyos-settings  # Твики планировщиков и системных лимитов (sysctl) от команды CachyOS
+        #- cachyos-settings  # Твики планировщиков и системных лимитов (sysctl) от команды CachyOS (такого не существует)
         - cifs-utils # для монтирования Samba через /etc/fstab
         - cmatrix # заставка Матрица
         - code
@@ -85,7 +85,7 @@ modules:
         - thunderbird
         - tldr # справка по командам Linux
         #- tree # для древовидного вывода папок (уже есть)
-        - uksmd # Автоматическая дедупликация памяти от команды CachyOS
+        #- uksmd # Автоматическая дедупликация памяти от команды CachyOS (такого не существует)
         - unrar # для распаковки RAR архивов
         #- unzip # (уже есть)
         #- vi # (уже есть)
