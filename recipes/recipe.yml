@@ -42,7 +42,6 @@ modules:
 
     install:
       packages:
-        - akmod-nvidia
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
         - brave-origin
@@ -92,6 +91,7 @@ modules:
         #- starship
         - steam
         - steam-devices # Крайне важный пакет: драйверы и правила для геймпадов (DualShock/DualSense/Xbox)
+        - syncthing
         - thunderbird
         - tldr # справка по командам Linux
         #- tree # для древовидного вывода папок (уже есть)
@@ -120,12 +120,12 @@ modules:
         # - kernel-modules-core
         # - kernel-modules-extra
 
-  - type: akmods
-    base: main # main: stock Fedora kernel / main and nvidia images; bazzite: Bazzite’s kernel / bazzite images
-    install:
-      - nvidia
+  #- type: akmods
+    #base: main # main: stock Fedora kernel / main and nvidia images; bazzite: Bazzite’s kernel / bazzite images
+    #install:
+      #- nvidia
     #nvidia-driver: nvidia
-    nvidia-driver: nvidia-open # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
+    #nvidia-driver: nvidia-open # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
 
   #- type: initramfs # сразу после dnf, после манипуляций с ядром
   #- type: script
@@ -169,6 +169,7 @@ modules:
           - com.vysp3r.ProtonPlus # ProtonPlus
           - com.github.Matoking.protontricks # Protontricks
           - net.davidotek.pupgui2 # ProtonUp-Qt (альтернатива ProtonPlus)
+          - io.github.martchus.syncthingtray
           - org.telegram.desktop
           - org.freedesktop.Platform.VulkanLayer.vkBasalt # vkBasalt (для Flatpak версий лаунчеров) - аналог ReShade 
           - org.videolan.VLC
