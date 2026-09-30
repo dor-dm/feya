@@ -19,20 +19,20 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  # Превентивный фикс известного бага (#119 blue-build/cli) с заменой ядра —
-  # ставим ДО того, как dnf-модуль заменит ядро
-  - type: script
-    snippets:
-      - mkdir -p /usr/lib/kernel/install.conf.d
-      - echo "layout=ostree" > /usr/lib/kernel/install.conf.d/00-kernel-layout.conf
+  # # Превентивный фикс известного бага (#119 blue-build/cli) с заменой ядра —
+  # # ставим ДО того, как dnf-модуль заменит ядро
+  # - type: script
+  #   snippets:
+  #     - mkdir -p /usr/lib/kernel/install.conf.d
+  #     - echo "layout=ostree" > /usr/lib/kernel/install.conf.d/00-kernel-layout.conf
 
   - type: dnf
     repos:
       cleanup: true
       nonfree: rpmfusion
       copr:
-        - bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
-        - bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
+        #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
+        #- bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
         - lihaohong/yazi
       #  - atim/starship
       files:
@@ -65,8 +65,8 @@ modules:
         - hello
         #- hollywood # заставка Эмуляция бурной деятельности (rpm пакет не найден)
         - kate # улучшенный текстовый редактор KDE
-        - kernel-cachyos # Так как мы подключили COPR выше, DNF сам возьмет эти пакеты оттуда # For GCC built kernels
-        - kernel-cachyos-devel-matched # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA # For GCC built kernels
+        #- kernel-cachyos # Так как мы подключили COPR выше, DNF сам возьмет эти пакеты оттуда # For GCC built kernels
+        #- kernel-cachyos-devel-matched # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA # For GCC built kernels
         - kcalc
         - keepassxc
         #- kio-extras # для открытия Samba в Dolphin (уже есть)
@@ -113,17 +113,17 @@ modules:
         # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-        # удалить дефолтное ядро
-        - kernel
-        - kernel-core
-        - kernel-modules
-        - kernel-modules-core
-        - kernel-modules-extra
+        # # удалить дефолтное ядро
+        # - kernel
+        # - kernel-core
+        # - kernel-modules
+        # - kernel-modules-core
+        # - kernel-modules-extra
 
   #- type: initramfs # сразу после dnf, после манипуляций с ядром
   - type: script
     snippets:
-      - setsebool -P domain_kernel_load_modules on
+      #- setsebool -P domain_kernel_load_modules on
       - akmods --force
 
   - type: default-flatpaks
