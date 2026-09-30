@@ -103,8 +103,8 @@ modules:
         - vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
         #- xorg-x11-drv-nvidia-libs.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
         - xorg-x11-drv-nvidia-cuda # компоненты официального драйвера NVIDIA и технологии CUDA
-        ## No match for argument: xorg-x11-drv-nvidia-cuda.i686
-        ##- xorg-x11-drv-nvidia-cuda.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
+        # No match for argument: xorg-x11-drv-nvidia-cuda.i686
+        #- xorg-x11-drv-nvidia-cuda.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
         - yazi # файловый менеджер на Rust
         #- zip # (уже есть)
     remove:
@@ -121,12 +121,12 @@ modules:
         # - kernel-modules-extra
 
   #- type: initramfs # сразу после dnf, после манипуляций с ядром
-  - type: script
-    snippets:
+  #- type: script
+    #snippets:
       #- setsebool -P domain_kernel_load_modules on
       #- akmods --force
 
-  - type: default-flatpaks #@v2
+  - type: default-flatpaks@v2
     configurations:
       - scope: system
         notify: true # Send notification after install/uninstall is finished (true/false)
