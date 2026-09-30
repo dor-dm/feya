@@ -33,15 +33,12 @@ modules:
 
     # ОПЕРАЦИЯ ЗАМЕНЫ ЯДРА (Происходит атомарно во время сборки образа)
     replace:
-      # Указываем точный ID репозитория, откуда берем новое ядро
-      from-repo: copr:copr.fedorainfracloud.org:bieszczaders:kernel-cachyos
-      packages:
-        # Список стоковых пакетов Fedora, которые будут ПОЛНОСТЬЮ удалены и заменены
-        - kernel
-        - kernel-core
-        - kernel-modules
-        - kernel-modules-core
-        - kernel-modules-extra
+      # Список стоковых пакетов Fedora, которые будут ПОЛНОСТЬЮ удалены и заменены
+      - kernel
+      - kernel-core
+      - kernel-modules
+      - kernel-modules-core
+      - kernel-modules-extra
     install:
       packages:
         # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
@@ -71,6 +68,7 @@ modules:
         - hello
         #- hollywood # заставка Эмуляция бурной деятельности (rpm пакет не найден)
         - kate # улучшенный текстовый редактор KDE
+        - kernel-cachyos # Так как мы подключили COPR выше, DNF сам возьмет эти пакеты оттуда
         - kernel-cachyos-devel # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA
         - kcalc
         - keepassxc
