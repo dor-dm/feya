@@ -24,17 +24,37 @@ modules:
       cleanup: true
       nonfree: rpmfusion
       copr:
+        - bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
         - lihaohong/yazi
       #  - atim/starship
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
         - https://packages.microsoft.com/yumrepos/vscode/config.repo
+
+    # ОПЕРАЦИЯ ЗАМЕНЫ ЯДРА (Происходит атомарно во время сборки образа)
+    replace:
+      # Указываем точный ID репозитория, откуда берем новое ядро
+      from-repo: copr:copr.fedorainfracloud.org:bieszczaders:kernel-cachyos
+      packages:
+        # Список стоковых пакетов Fedora, которые будут ПОЛНОСТЬЮ удалены и заменены
+        - kernel
+        - kernel-core
+        - kernel-modules
+        - kernel-modules-core
+        - kernel-modules-extra
     install:
       packages:
+        # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
+        #- akmod-nvidia-open
+        #- xorg-x11-drv-nvidia-cuda
+        #- nvidia-vaapi-driver
+        #- xorg-x11-drv-nvidia-libs.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
+        #- xorg-x11-drv-nvidia-cuda.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
         - brave-origin
         - btop
+        - cachyos-settings  # Твики планировщиков и системных лимитов (sysctl) от команды CachyOS
         - cifs-utils # для монтирования Samba через /etc/fstab
         - cmatrix # заставка Матрица
         - code
@@ -51,6 +71,7 @@ modules:
         - hello
         #- hollywood # заставка Эмуляция бурной деятельности (rpm пакет не найден)
         - kate # улучшенный текстовый редактор KDE
+        - kernel-cachyos-devel # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA
         - kcalc
         - keepassxc
         #- kio-extras # для открытия Samba в Dolphin (уже есть)
@@ -58,8 +79,8 @@ modules:
         - mangohud # MangoHud для rpm версий лаунчеров
         # Важнейшие 32-битные библиотеки Vulkan и Mesa для графики Intel/AMD (Mesa-drivers)
         # Они обязательны, чтобы игры запускались через Proton
-        #- mesa-vulkan-drivers.i686 # актуально для видеочипов Intel/AMD
-        #- mesa-dri-drivers.i686 # актуально для видеочипов Intel/AMD
+        - mesa-vulkan-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
+        - mesa-dri-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
         - mc
         #- micro
         #- nano # (уже есть)
@@ -74,6 +95,7 @@ modules:
         - thunderbird
         - tldr # справка по командам Linux
         #- tree # для древовидного вывода папок (уже есть)
+        - uksmd # Автоматическая дедупликация памяти от команды CachyOS
         - unrar # для распаковки RAR архивов
         #- unzip # (уже есть)
         #- vi # (уже есть)
@@ -90,14 +112,19 @@ modules:
 
   - type: default-flatpaks
     configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
-        scope: system
+      - scope: system
+        notify: true # Send notification after install/uninstall is finished (true/false)
+        repo:
+          url: https://mirror.sjtu.edu.cn/flathub
+          name: flathub
+          title: Flathub (SJTUG Mirror)
         install: []
         # If no repo information is specified, Flathub will be used by default
         #install: # system flatpaks we want all users to have and not remove
           #- org.mozilla.firefox
           #- org.gnome.Loupe
       - scope: user # Also add Flathub user repo, but no user packages
+        notify: true # Send notification after install/uninstall is finished (true/false)
         repo:
           url: https://mirror.sjtu.edu.cn/flathub
           name: flathub
@@ -118,6 +145,7 @@ modules:
           - com.vysp3r.ProtonPlus # ProtonPlus
           - com.github.Matoking.protontricks # Protontricks
           - net.davidotek.pupgui2 # ProtonUp-Qt (альтернатива ProtonPlus)
+          - org.telegram.desktop
           - org.freedesktop.Platform.VulkanLayer.vkBasalt # vkBasalt (для Flatpak версий лаунчеров) - аналог ReShade 
           - org.videolan.VLC
           - io.github.flattool.Warehouse # Warehouse для управления Flatpak пакетами
