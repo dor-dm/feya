@@ -31,10 +31,10 @@ modules:
       cleanup: true
       nonfree: rpmfusion
       copr:
+        - lihaohong/yazi
         #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
         #- bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
-        - lihaohong/yazi
-      #  - atim/starship
+        #  - atim/starship
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
         - https://packages.microsoft.com/yumrepos/vscode/config.repo
@@ -111,7 +111,7 @@ modules:
         # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-        # # удалить дефолтное ядро
+        # удалить дефолтное ядро
         # - kernel
         # - kernel-core
         # - kernel-modules
