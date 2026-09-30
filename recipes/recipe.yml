@@ -26,26 +26,60 @@ modules:
       #copr:
       #  - atim/starship
       files:
-        # Подключаем официальный RPM-репозиторий Brave
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
         - https://packages.microsoft.com/yumrepos/vscode/config.repo
     install:
       packages:
-        #- micro
-        #- starship
-        - bat
-        # Устанавливаем облегченную версию Brave Origin
+        #- ark # нативный архиватор KDE (уже есть)
+        - bat # вместо cat
         - brave-origin
-        # Устанавливаем официальный VS Code
+        - btop
+        - cifs-utils # для монтирования Samba через /etc/fstab
+        - cmatrix # заставка Матрица
         - code
-        # Устанавливаем сам клиент Steam
-        - steam
-        # Крайне важный пакет: драйверы и правила для геймпадов (DualShock/DualSense/Xbox)
-        #- steam-devices
+        #- cosign # (уже есть)
+        - cowsay # говорящая корова и другие ASCII картинки
+        #- dolphin # нативный файловый менеджер KDE (уже есть)
+        - fastfetch
+        #- filelight # диаграмма распределения места на дисках (уже есть)
+        - fortune # цитаты
+        #- git # (уже есть)
+        - goverlay # для настройки датчиков MangoHud
+        - gwenview # нативный просмоторщик изображений KDE
+        - haruna # нативный видеоплеер для KDE
+        - hello
+        - hollywood # заставка Эмуляция бурной деятельности
+        - kate # улучшенный текстовый редактор KDE
+        - kcalc
+        - keepassxc
+        #- kio-extras # для открытия Samba в Dolphin (уже есть)
+        #- kio-fuse # для открытия Samba в Dolphin (уже есть)
+        - mangohud # MangoHud для rpm версий лаунчеров
         # Важнейшие 32-битные библиотеки Vulkan и Mesa для графики Intel/AMD (Mesa-drivers)
         # Они обязательны, чтобы игры запускались через Proton
-        #- mesa-vulkan-drivers.i686
-        #- mesa-dri-drivers.i686
+        #- mesa-vulkan-drivers.i686 # актуально для видеочипов Intel/AMD
+        #- mesa-dri-drivers.i686 # актуально для видеочипов Intel/AMD
+        - mc
+        #- micro
+        #- nano # (уже есть)
+        - okular # просмоторщик PDF
+        - p7zip # для работы с 7zip архивами
+        - p7zip-plugins # для работы с 7zip архивами
+        - qbittorrent
+        #- samba-client # набор CLI-утилит для Samba (уже есть)
+        #- starship
+        - steam
+        - steam-devices # Крайне важный пакет: драйверы и правила для геймпадов (DualShock/DualSense/Xbox)
+        - thunderbird
+        - tldr # справка по командам Linux
+        #- tree # для древовидного вывода папок (уже есть)
+        - unrar # для распаковки RAR архивов
+        #- unzip # (уже есть)
+        #- vi # (уже есть)
+        - vkBasalt.x86_64 # vkBasalt версия для современных 64-битных игр и программ (для rpm версий лаунчеров)
+        - vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
+        - yazi # файловый менеджер на Rust
+        #- zip # (уже есть)
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
@@ -64,12 +98,25 @@ modules:
           #- org.gnome.Loupe
       - scope: user # Also add Flathub user repo, but no user packages
         install:
-          - md.obsidian.Obsidian
+          - com.ranfdev.DistroShelf # DistroShelf для управления Distrobox контейнерами
+          - org.jeffvli.feishin # аудио плеер под стриминг
+          - com.github.tchx84.Flatseal # Flatseal для управления разрешениями Flatpak
+          - it.mijorus.gearlever # Gear Lever для управления AppImages
+          - com.heroicgameslauncher.hgl # Heroic Games Launcher
           - org.jellyfin.JellyfinDesktop
-          - org.jeffvli.feishin
-          - com.heroicgameslauncher.hgl
+          - io.github.DenysMb.Kontainer # Kontainer для управления Distrobox контейнерами
+          - org.freedesktop.Platform.VulkanLayer.MangoHud # MangoHud для Flatpak версий лаунчеров
+          - io.missioncenter.MissionCenter # монитор ресурсов
+          - md.obsidian.Obsidian
+          #- io.github.peazip.PeaZip # альтернативный архиватор (если Ark не устроит)
+          - io.podman_desktop.PodmanDesktop
+          - com.vysp3r.ProtonPlus # ProtonPlus
+          - com.github.Matoking.protontricks # Protontricks
+          - net.davidotek.pupgui2 # ProtonUp-Qt (альтернатива ProtonPlus)
+          - org.freedesktop.Platform.VulkanLayer.vkBasalt # vkBasalt (для Flatpak версий лаунчеров) - аналог ReShade 
+          - org.videolan.VLC
+          - io.github.flattool.Warehouse # Warehouse для управления Flatpak пакетами
 
-  # Настройка Homebrew от BlueBuild
-  - type: brew
+  - type: brew # Homebrew
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
