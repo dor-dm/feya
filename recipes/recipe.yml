@@ -23,7 +23,8 @@ modules:
     repos:
       cleanup: true
       nonfree: rpmfusion
-      #copr:
+      copr:
+        - lihaohong/yazi
       #  - atim/starship
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
