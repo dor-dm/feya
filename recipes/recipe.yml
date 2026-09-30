@@ -49,7 +49,7 @@ modules:
         - gwenview # нативный просмоторщик изображений KDE
         - haruna # нативный видеоплеер для KDE
         - hello
-        #- hollywood # заставка Эмуляция бурной деятельности
+        #- hollywood # заставка Эмуляция бурной деятельности (rpm пакет не найден)
         - kate # улучшенный текстовый редактор KDE
         - kcalc
         - keepassxc
@@ -98,6 +98,10 @@ modules:
           #- org.mozilla.firefox
           #- org.gnome.Loupe
       - scope: user # Also add Flathub user repo, but no user packages
+        repo:
+          url: https://mirror.sjtu.edu.cn/flathub
+          name: flathub
+          title: Flathub (SJTUG Mirror)
         install:
           - com.ranfdev.DistroShelf # DistroShelf для управления Distrobox контейнерами
           - org.jeffvli.feishin # аудио плеер под стриминг
