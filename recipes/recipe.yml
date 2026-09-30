@@ -118,9 +118,8 @@ modules:
         # - kernel-modules-core
         # - kernel-modules-extra
 
-
-  - type: akmods
-    nvidia-driver: nvidia-open # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
+  #- type: akmods
+  #  nvidia-driver: nvidia-open # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
 
   #- type: initramfs # сразу после dnf, после манипуляций с ядром
   #- type: script
