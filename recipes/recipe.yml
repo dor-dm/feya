@@ -35,7 +35,7 @@ modules:
     install:
       packages:
         #- akmod-nvidia # Драйверы графики NVIDIA (akmods автоматически подхватит установленное ядро cachyos)
-        #- akmod-nvidia-open
+        - akmod-nvidia-open
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
         - brave-origin
@@ -95,7 +95,7 @@ modules:
         - vkBasalt.x86_64 # vkBasalt версия для современных 64-битных игр и программ (для rpm версий лаунчеров)
         - vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
         #- xorg-x11-drv-nvidia-libs.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
-        #- xorg-x11-drv-nvidia-cuda # компоненты официального драйвера NVIDIA и технологии CUDA
+        - xorg-x11-drv-nvidia-cuda # компоненты официального драйвера NVIDIA и технологии CUDA
         ## No match for argument: xorg-x11-drv-nvidia-cuda.i686
         ##- xorg-x11-drv-nvidia-cuda.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
         - yazi # файловый менеджер на Rust
@@ -113,7 +113,11 @@ modules:
         - kernel-modules-core
         - kernel-modules-extra
 
-  - type: initramfs # сразу после dnf, после манипуляций с ядром
+  #- type: initramfs # сразу после dnf, после манипуляций с ядром
+  - type: script
+    snippets:
+      - setsebool -P domain_kernel_load_modules on
+      - akmods --force
 
   - type: default-flatpaks
     configurations:
