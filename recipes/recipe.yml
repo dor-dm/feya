@@ -31,8 +31,8 @@ modules:
       cleanup: true
       nonfree: rpmfusion
       copr:
-        - bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
-        - bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
+        #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
+        #- bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
         - lihaohong/yazi
         #  - atim/starship
       files:
@@ -97,8 +97,8 @@ modules:
         - unrar # для распаковки RAR архивов
         #- unzip # (уже есть)
         #- vi # (уже есть)
-        - vkBasalt.x86_64 # vkBasalt версия для современных 64-битных игр и программ (для rpm версий лаунчеров)
-        - vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
+        #- vkBasalt.x86_64 # vkBasalt версия для современных 64-битных игр и программ (для rpm версий лаунчеров)
+        #- vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
         #- xorg-x11-drv-nvidia-libs.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
         - xorg-x11-drv-nvidia-cuda # компоненты официального драйвера NVIDIA и технологии CUDA
         # No match for argument: xorg-x11-drv-nvidia-cuda.i686
