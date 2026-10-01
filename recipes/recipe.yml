@@ -9,6 +9,7 @@ description: This is my personal OS image.
 #base-image: ghcr.io/ublue-os/silverblue-main
 #image-version: latest # You can pin to a specific version of Fedora as well
 #base-image: ghcr.io/ublue-os/kinoite-main
+#base-image: ghcr.io/ublue-os/kinoite-nvidia
 base-image: quay.io/fedora/fedora-kinoite
 image-version: 44
 
@@ -133,14 +134,14 @@ modules:
       #- setsebool -P domain_kernel_load_modules on
       #- akmods --force
 
-  - type: default-flatpaks@v2
+  - type: default-flatpaks
     configurations:
       - scope: system
         notify: true # Send notification after install/uninstall is finished (true/false)
-        repo:
-          url: https://mirror.sjtu.edu.cn/flathub
-          name: flathub
-          title: Flathub (SJTUG Mirror)
+        # repo:
+        #   url: https://mirror.sjtu.edu.cn/flathub/?mirror_intel_list
+        #   name: flathub
+        #   title: Flathub (SJTUG Mirror)
         install: []
         # If no repo information is specified, Flathub will be used by default
         #install: # system flatpaks we want all users to have and not remove
@@ -148,10 +149,10 @@ modules:
           #- org.gnome.Loupe
       - scope: user # Also add Flathub user repo, but no user packages
         notify: true # Send notification after install/uninstall is finished (true/false)
-        repo:
-          url: https://mirror.sjtu.edu.cn/flathub
-          name: flathub
-          title: Flathub (SJTUG Mirror)
+        # repo:
+        #   url: https://mirror.sjtu.edu.cn/flathub/?mirror_intel_list
+        #   name: flathub
+        #   title: Flathub (SJTUG Mirror)
         install:
           - com.ranfdev.DistroShelf # DistroShelf для управления Distrobox контейнерами
           - org.jeffvli.feishin # аудио плеер под стриминг
@@ -174,6 +175,11 @@ modules:
           - org.freedesktop.Platform.VulkanLayer.vkBasalt # vkBasalt (для Flatpak версий лаунчеров) - аналог ReShade 
           - org.videolan.VLC
           - io.github.flattool.Warehouse # Warehouse для управления Flatpak пакетами
+          
+  - type: script
+    snippets:
+      - flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+      - flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
 
   - type: brew # Homebrew
 
