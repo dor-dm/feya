@@ -42,8 +42,7 @@ modules:
         - https://packages.microsoft.com/yumrepos/vscode/config.repo
 
     install:
-      exclude:
-        - libfdk-aac        # <--- исключаем проблемный пакет
+      allow-erasing: true   # <--- Разрешаем удаление конфликтующего пакета
       packages:
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
