@@ -34,7 +34,7 @@ modules:
       nonfree: rpmfusion
       copr:
         #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
-        - bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
+        - bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings
         - lihaohong/yazi
         #  - atim/starship
       files:
@@ -44,8 +44,8 @@ modules:
     install:
       allow-erasing: true   # <--- Разрешаем удаление конфликтующего пакета (потребовалось при переключении на ublue-os/kinoite-nvidia)
       packages:
-        - ananicy-cpp # Управление приоритетами как в CachyOS
-        - ananicy-cpp-rules # Управление приоритетами как в CachyOS
+        #- ananicy-cpp # Управление приоритетами как в CachyOS (не использовать вместе с sched-ext)
+        #- ananicy-cpp-rules # Управление приоритетами как в CachyOS (не использовать вместе с sched-ext)
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
         - brave-origin
@@ -196,11 +196,12 @@ modules:
       enabled:
         - scx_loader.service
 
+  # не использовать вместе с sched-ext
   # Настройка ananicy-cpp (автозапуск)
-  - type: systemd
-    system:
-      enabled:
-        - ananicy-cpp.service
+  # - type: systemd
+  #   system:
+  #     enabled:
+  #       - ananicy-cpp.service
 
   - type: brew # Homebrew
 
