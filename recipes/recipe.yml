@@ -164,7 +164,7 @@ modules:
           - com.heroicgameslauncher.hgl # Heroic Games Launcher
           - org.jellyfin.JellyfinDesktop
           - io.github.DenysMb.Kontainer # Kontainer для управления Distrobox контейнерами
-          - org.freedesktop.Platform.VulkanLayer.MangoHud # MangoHud для Flatpak версий лаунчеров
+          #- org.freedesktop.Platform.VulkanLayer.MangoHud # MangoHud для Flatpak версий лаунчеров (пакет не найден)
           - io.missioncenter.MissionCenter # монитор ресурсов
           - md.obsidian.Obsidian
           #- io.github.peazip.PeaZip # альтернативный архиватор (если Ark не устроит)
