@@ -174,7 +174,7 @@ modules:
           - net.davidotek.pupgui2 # ProtonUp-Qt (альтернатива ProtonPlus)
           - io.github.martchus.syncthingtray
           - org.telegram.desktop
-          - org.freedesktop.Platform.VulkanLayer.vkBasalt # vkBasalt (для Flatpak версий лаунчеров) - аналог ReShade 
+          #- org.freedesktop.Platform.VulkanLayer.vkBasalt # vkBasalt (для Flatpak версий лаунчеров) - аналог ReShade (пакет не найден)
           - org.videolan.VLC
           - io.github.flattool.Warehouse # Warehouse для управления Flatpak пакетами
 
