@@ -183,7 +183,10 @@ modules:
 
   - type: script
     snippets:
-      - flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
+      - flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+      - flatpak remote-modify --system flathub --url=https://mirror.sjtu.edu.cn/flathub
+      - flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+      - flatpak remote-modify --user flathub --url=https://mirror.sjtu.edu.cn/flathub
 
   - type: brew # Homebrew
 
