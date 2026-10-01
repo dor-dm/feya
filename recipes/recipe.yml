@@ -34,7 +34,7 @@ modules:
       nonfree: rpmfusion
       copr:
         #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
-        #- bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
+        - bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings, uksmd
         - lihaohong/yazi
         #  - atim/starship
       files:
@@ -42,8 +42,10 @@ modules:
         - https://packages.microsoft.com/yumrepos/vscode/config.repo
 
     install:
-      allow-erasing: true   # <--- Разрешаем удаление конфликтующего пакета
+      allow-erasing: true   # <--- Разрешаем удаление конфликтующего пакета (потребовалось при переключении на ublue-os/kinoite-nvidia)
       packages:
+        - ananicy-cpp # Управление приоритетами как в CachyOS
+        - ananicy-cpp-rules # Управление приоритетами как в CachyOS
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
         - brave-origin
@@ -87,9 +89,9 @@ modules:
         - p7zip-plugins # для работы с 7zip архивами
         - qbittorrent
         #- samba-client # набор CLI-утилит для Samba (уже есть)
-        #- scx-scheds # CachyOS sched-ext
-        #- scx-tools # CachyOS sched-ext
-        #- scx-manager # чтобы переключать планировщики CachyOS через GUI
+        - scx-scheds # Планировщики CachyOS sched-ext
+        - scx-tools # Планировщики CachyOS sched-ext
+        - scx-manager # чтобы переключать планировщики CachyOS через GUI
         #- starship
         - steam
         - steam-devices # Крайне важный пакет: драйверы и правила для геймпадов (DualShock/DualSense/Xbox)
@@ -97,7 +99,6 @@ modules:
         - thunderbird
         - tldr # справка по командам Linux
         #- tree # для древовидного вывода папок (уже есть)
-        #- uksmd # Автоматическая дедупликация памяти от команды CachyOS
         - unrar # для распаковки RAR архивов
         #- unzip # (уже есть)
         #- vi # (уже есть)
@@ -185,6 +186,12 @@ modules:
       - flatpak remote-modify --system flathub --url=https://mirror.sjtu.edu.cn/flathub
       - flatpak remote-add --user --if-not-exists flathub https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
       - flatpak remote-modify --user flathub --url=https://mirror.sjtu.edu.cn/flathub
+
+  # Настройка ananicy-cpp (автозапуск)
+  - type: systemd
+    system:
+      enabled:
+        - ananicy-cpp.service
 
   - type: brew # Homebrew
 
