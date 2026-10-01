@@ -9,8 +9,8 @@ description: This is my personal OS image.
 #base-image: ghcr.io/ublue-os/silverblue-main
 #image-version: latest # You can pin to a specific version of Fedora as well
 #base-image: ghcr.io/ublue-os/kinoite-main
-#base-image: ghcr.io/ublue-os/kinoite-nvidia
-base-image: quay.io/fedora/fedora-kinoite
+base-image: ghcr.io/ublue-os/kinoite-nvidia
+#base-image: quay.io/fedora/fedora-kinoite
 image-version: 44
 
 # module configuration, executed in order
@@ -74,8 +74,8 @@ modules:
         - mangohud # MangoHud для rpm версий лаунчеров
         # Важнейшие 32-битные библиотеки Vulkan и Mesa для графики Intel/AMD (Mesa-drivers)
         # Они обязательны, чтобы игры запускались через Proton
-        - mesa-vulkan-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
-        - mesa-dri-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
+        #- mesa-vulkan-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
+        #- mesa-dri-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
         - mc
         #- micro
         #- nano # (уже есть)
@@ -101,7 +101,7 @@ modules:
         #- unzip # (уже есть)
         #- vi # (уже есть)
         - vkBasalt.x86_64 # vkBasalt версия для современных 64-битных игр и программ (для rpm версий лаунчеров)
-        - vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
+        #- vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
         #- xorg-x11-drv-nvidia-libs.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
         #- xorg-x11-drv-nvidia-cuda # компоненты официального драйвера NVIDIA и технологии CUDA
         # No match for argument: xorg-x11-drv-nvidia-cuda.i686
