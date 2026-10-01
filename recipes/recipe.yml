@@ -134,15 +134,6 @@ modules:
       #- setsebool -P domain_kernel_load_modules on
       #- akmods --force
 
-  # - type: script
-  #   snippets:
-  #     - flatpak remote-modify --system flathub --url=https://mirror.sjtu.edu.cn/flathub
-  #     - flatpak remote-modify --user flathub --url=https://mirror.sjtu.edu.cn/flathub
-
-  - type: script
-    snippets:
-      - flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
-
   - type: default-flatpaks
     configurations:
       - scope: system
@@ -184,6 +175,15 @@ modules:
           - org.freedesktop.Platform.VulkanLayer.vkBasalt # vkBasalt (для Flatpak версий лаунчеров) - аналог ReShade 
           - org.videolan.VLC
           - io.github.flattool.Warehouse # Warehouse для управления Flatpak пакетами
+
+  # - type: script
+  #   snippets:
+  #     - flatpak remote-modify --system flathub --url=https://mirror.sjtu.edu.cn/flathub
+  #     - flatpak remote-modify --user flathub --url=https://mirror.sjtu.edu.cn/flathub
+
+  - type: script
+    snippets:
+      - flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
 
   - type: brew # Homebrew
 
