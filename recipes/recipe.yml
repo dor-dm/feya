@@ -42,6 +42,8 @@ modules:
         - https://packages.microsoft.com/yumrepos/vscode/config.repo
 
     install:
+      exclude:
+        - libfdk-aac        # <--- исключаем проблемный пакет
       packages:
         #- ark # нативный архиватор KDE (уже есть)
         - bat # вместо cat
@@ -56,8 +58,6 @@ modules:
         - cowsay # говорящая корова и другие ASCII картинки
         #- dolphin # нативный файловый менеджер KDE (уже есть)
         - fastfetch
-        # Попытка принудительно установить 32-битную версию (конфликт пакетов fdk-aac в образе ublue-os/kinoite-nvidia)
-        - fdk-aac-free.i686
         #- filelight # диаграмма распределения места на дисках (уже есть)
         - fortune # цитаты
         #- git # (уже есть)
