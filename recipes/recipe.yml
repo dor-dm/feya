@@ -9,17 +9,19 @@ description: This is my personal OS image.
 #base-image: ghcr.io/ublue-os/silverblue-main
 #image-version: latest # You can pin to a specific version of Fedora as well
 #base-image: ghcr.io/ublue-os/kinoite-main
-base-image: ghcr.io/ublue-os/kinoite-nvidia
 #base-image: quay.io/fedora/fedora-kinoite
-image-version: 44
+# base-image: ghcr.io/ublue-os/kinoite-nvidia
+# image-version: 44
+base-image: ghcr.io/ublue-os/bazzite-dx-nvidia
+image-version: stable
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  - type: files
-    files:
-      - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+  # - type: files
+  #   files:
+  #     - source: system
+  #       destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   # # Превентивный фикс известного бага (#119 blue-build/cli) с заменой ядра —
   # # ставим ДО того, как dnf-модуль заменит ядро
@@ -31,100 +33,100 @@ modules:
   - type: dnf
     repos:
       cleanup: true
-      nonfree: rpmfusion
+      #nonfree: rpmfusion
       copr:
-        #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
-        - bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings
+        # #- bieszczaders/kernel-cachyos # официальный и проверенный COPR с ядрами CachyOS для Fedora
+        #- bieszczaders/kernel-cachyos-addons # для CachyOS sched-ext, cachyos-settings
         - lihaohong/yazi
         #  - atim/starship
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-        - https://packages.microsoft.com/yumrepos/vscode/config.repo
+        #- https://packages.microsoft.com/yumrepos/vscode/config.repo
 
     install:
-      allow-erasing: true   # <--- Разрешаем удаление конфликтующего пакета (потребовалось при переключении на ublue-os/kinoite-nvidia)
+      #allow-erasing: true   # <--- Разрешаем удаление конфликтующего пакета (потребовалось при переключении на ublue-os/kinoite-nvidia)
       packages:
-        #- ananicy-cpp # Управление приоритетами как в CachyOS (не использовать вместе с sched-ext)
-        #- ananicy-cpp-rules # Управление приоритетами как в CachyOS (не использовать вместе с sched-ext)
-        #- ark # нативный архиватор KDE (уже есть)
-        - bat # вместо cat
-        - brave-origin
-        - btop
-        # conflicts with zram-generator-defaults
-        #- cachyos-settings  # Твики планировщиков и системных лимитов (sysctl) от команды CachyOS
-        - cifs-utils # для монтирования Samba через /etc/fstab
-        - cmatrix # заставка Матрица
-        - code
-        #- cosign # (уже есть)
-        - cowsay # говорящая корова и другие ASCII картинки
-        #- dolphin # нативный файловый менеджер KDE (уже есть)
-        - fastfetch
-        #- filelight # диаграмма распределения места на дисках (уже есть)
-        - fortune # цитаты
-        #- git # (уже есть)
-        - goverlay # для настройки датчиков MangoHud
-        - gwenview # нативный просмоторщик изображений KDE
-        - haruna # нативный видеоплеер для KDE
-        - hello
-        #- hollywood # заставка Эмуляция бурной деятельности (rpm пакет не найден)
-        #- htop # (уже есть в ublue)
-        - kate # улучшенный текстовый редактор KDE
-        #- kernel-cachyos # Так как мы подключили COPR выше, DNF сам возьмет эти пакеты оттуда # For GCC built kernels
-        #- kernel-cachyos-devel-matched # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA # For GCC built kernels
-        - kcalc
-        - keepassxc
-        #- kio-extras # для открытия Samba в Dolphin (уже есть)
-        #- kio-fuse # для открытия Samba в Dolphin (уже есть)
-        - lm_sensors # для MissionCenter
-        - mangohud # MangoHud для rpm версий лаунчеров
-        # Важнейшие 32-битные библиотеки Vulkan и Mesa для графики Intel/AMD (Mesa-drivers)
-        # Они обязательны, чтобы игры запускались через Proton
-        #- mesa-vulkan-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
-        #- mesa-dri-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
-        - mc
-        #- micro
-        #- nano # (уже есть)
-        # No match for argument: nvidia-vaapi-driver
-        #- nvidia-vaapi-driver
-        #- nvtop # для NVIDIA (уже есть в ublue)
-        - okular # просмоторщик PDF
-        - p7zip # для работы с 7zip архивами
-        - p7zip-plugins # для работы с 7zip архивами
-        - qbittorrent
-        #- samba-client # набор CLI-утилит для Samba (уже есть)
-        - scx-scheds # Планировщики CachyOS sched-ext
-        - scx-tools # Планировщики CachyOS sched-ext
-        - scx-manager # чтобы переключать планировщики CachyOS через GUI
-        #- starship
-        - steam
-        - steam-devices # Крайне важный пакет: драйверы и правила для геймпадов (DualShock/DualSense/Xbox)
-        - syncthing
-        - thunderbird
-        - tldr # справка по командам Linux
-        #- tree # для древовидного вывода папок (уже есть)
-        - unrar # для распаковки RAR архивов
-        #- unzip # (уже есть)
-        #- vi # (уже есть)
-        - vkBasalt.x86_64 # vkBasalt версия для современных 64-битных игр и программ (для rpm версий лаунчеров)
-        #- vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
-        #- xorg-x11-drv-nvidia-libs.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
-        #- xorg-x11-drv-nvidia-cuda # компоненты официального драйвера NVIDIA и технологии CUDA
-        # No match for argument: xorg-x11-drv-nvidia-cuda.i686
-        #- xorg-x11-drv-nvidia-cuda.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
+        # #- ananicy-cpp # Управление приоритетами как в CachyOS (не использовать вместе с sched-ext)
+        # #- ananicy-cpp-rules # Управление приоритетами как в CachyOS (не использовать вместе с sched-ext)
+        # #- ark # нативный архиватор KDE (уже есть)
+        # - bat # вместо cat
+        # - brave-origin
+        # - btop
+        # # conflicts with zram-generator-defaults
+        # #- cachyos-settings  # Твики планировщиков и системных лимитов (sysctl) от команды CachyOS
+        # - cifs-utils # для монтирования Samba через /etc/fstab
+        # - cmatrix # заставка Матрица
+        # - code
+        # #- cosign # (уже есть)
+        # - cowsay # говорящая корова и другие ASCII картинки
+        # #- dolphin # нативный файловый менеджер KDE (уже есть)
+        # - fastfetch
+        # #- filelight # диаграмма распределения места на дисках (уже есть)
+        # - fortune # цитаты
+        # #- git # (уже есть)
+        # - goverlay # для настройки датчиков MangoHud
+        # - gwenview # нативный просмоторщик изображений KDE
+        # - haruna # нативный видеоплеер для KDE
+        # - hello
+        # #- hollywood # заставка Эмуляция бурной деятельности (rpm пакет не найден)
+        # #- htop # (уже есть в ublue)
+        # - kate # улучшенный текстовый редактор KDE
+        # #- kernel-cachyos # Так как мы подключили COPR выше, DNF сам возьмет эти пакеты оттуда # For GCC built kernels
+        # #- kernel-cachyos-devel-matched # дополнительный сборочный пакет (headers), обязательный для компиляции драйверов NVIDIA # For GCC built kernels
+        # - kcalc
+        # - keepassxc
+        # #- kio-extras # для открытия Samba в Dolphin (уже есть)
+        # #- kio-fuse # для открытия Samba в Dolphin (уже есть)
+        # - lm_sensors # для MissionCenter
+        # - mangohud # MangoHud для rpm версий лаунчеров
+        # # Важнейшие 32-битные библиотеки Vulkan и Mesa для графики Intel/AMD (Mesa-drivers)
+        # # Они обязательны, чтобы игры запускались через Proton
+        # #- mesa-vulkan-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
+        # #- mesa-dri-drivers.i686 # актуально для видеочипов Intel/AMD (возможно нужны и для NVIDIA)
+        # - mc
+        # #- micro
+        # #- nano # (уже есть)
+        # # No match for argument: nvidia-vaapi-driver
+        # #- nvidia-vaapi-driver
+        # #- nvtop # для NVIDIA (уже есть в ublue)
+        # - okular # просмоторщик PDF
+        # - p7zip # для работы с 7zip архивами
+        # - p7zip-plugins # для работы с 7zip архивами
+        # - qbittorrent
+        # #- samba-client # набор CLI-утилит для Samba (уже есть)
+        # - scx-scheds # Планировщики CachyOS sched-ext
+        # - scx-tools # Планировщики CachyOS sched-ext
+        # - scx-manager # чтобы переключать планировщики CachyOS через GUI
+        # #- starship
+        # - steam
+        # - steam-devices # Крайне важный пакет: драйверы и правила для геймпадов (DualShock/DualSense/Xbox)
+        # - syncthing
+        # - thunderbird
+        # - tldr # справка по командам Linux
+        # #- tree # для древовидного вывода папок (уже есть)
+        # - unrar # для распаковки RAR архивов
+        # #- unzip # (уже есть)
+        # #- vi # (уже есть)
+        # - vkBasalt.x86_64 # vkBasalt версия для современных 64-битных игр и программ (для rpm версий лаунчеров)
+        # #- vkBasalt.i686 # vkBasalt версия для старых 32-битных игр (а также для многих классических игр в Steam, которые запускаются через Proton/Wine) (для rpm версий лаунчеров)
+        # #- xorg-x11-drv-nvidia-libs.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
+        # #- xorg-x11-drv-nvidia-cuda # компоненты официального драйвера NVIDIA и технологии CUDA
+        # # No match for argument: xorg-x11-drv-nvidia-cuda.i686
+        # #- xorg-x11-drv-nvidia-cuda.i686 # 32-битные (i686) компоненты официального драйвера NVIDIA и технологии CUDA
         - yazi # файловый менеджер на Rust
-        #- zip # (уже есть)
-    remove:
-      packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-        # удалить дефолтное ядро
-        # - kernel
-        # - kernel-core
-        # - kernel-modules
-        # - kernel-modules-core
-        # - kernel-modules-extra
+        # #- zip # (уже есть)
+    # remove:
+    #   packages:
+    #     # example: removing firefox (in favor of the flatpak)
+    #     # "firefox" is the main package, "firefox-langpacks" is a dependency
+    #     - firefox
+    #     - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+    #     # удалить дефолтное ядро
+    #     # - kernel
+    #     # - kernel-core
+    #     # - kernel-modules
+    #     # - kernel-modules-core
+    #     # - kernel-modules-extra
 
   #- type: akmods
     #base: main # main: stock Fedora kernel / main and nvidia images; bazzite: Bazzite’s kernel / bazzite images
@@ -139,62 +141,62 @@ modules:
       #- setsebool -P domain_kernel_load_modules on
       #- akmods --force
 
-  - type: default-flatpaks
-    configurations:
-      - scope: system
-        notify: true # Send notification after install/uninstall is finished (true/false)
-        repo:
-          #url: https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
-          url: file:///etc/flatpak-repos/flathub-mirror.flatpakrepo
-          name: flathub
-          title: Flathub (SJTUG Mirror)
-        install: []
-        # If no repo information is specified, Flathub will be used by default
-        #install: # system flatpaks we want all users to have and not remove
-          #- org.mozilla.firefox
-          #- org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
-        notify: true # Send notification after install/uninstall is finished (true/false)
-        repo:
-          #url: https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
-          url: file:///etc/flatpak-repos/flathub-mirror.flatpakrepo
-          name: flathub
-          title: Flathub (SJTUG Mirror)
-        install:
-          - com.ranfdev.DistroShelf # DistroShelf для управления Distrobox контейнерами
-          - org.jeffvli.feishin # аудио плеер под стриминг
-          - org.filezillaproject.Filezilla
-          - com.github.tchx84.Flatseal # Flatseal для управления разрешениями Flatpak
-          - it.mijorus.gearlever # Gear Lever для управления AppImages
-          - com.heroicgameslauncher.hgl # Heroic Games Launcher
-          - org.jellyfin.JellyfinDesktop
-          - io.github.DenysMb.Kontainer # Kontainer для управления Distrobox контейнерами
-          #- org.freedesktop.Platform.VulkanLayer.MangoHud # MangoHud для Flatpak версий лаунчеров (пакет не найден)
-          - io.missioncenter.MissionCenter # монитор ресурсов
-          - md.obsidian.Obsidian
-          #- io.github.peazip.PeaZip # альтернативный архиватор (если Ark не устроит)
-          - io.podman_desktop.PodmanDesktop
-          - com.vysp3r.ProtonPlus # ProtonPlus
-          - com.github.Matoking.protontricks # Protontricks
-          - net.davidotek.pupgui2 # ProtonUp-Qt (альтернатива ProtonPlus)
-          - io.github.martchus.syncthingtray
-          - org.telegram.desktop
-          #- org.freedesktop.Platform.VulkanLayer.vkBasalt # vkBasalt (для Flatpak версий лаунчеров) - аналог ReShade (пакет не найден)
-          - org.videolan.VLC
-          - io.github.flattool.Warehouse # Warehouse для управления Flatpak пакетами
+  # - type: default-flatpaks
+  #   configurations:
+  #     - scope: system
+  #       notify: true # Send notification after install/uninstall is finished (true/false)
+  #       repo:
+  #         #url: https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
+  #         url: file:///etc/flatpak-repos/flathub-mirror.flatpakrepo
+  #         name: flathub
+  #         title: Flathub (SJTUG Mirror)
+  #       install: []
+  #       # If no repo information is specified, Flathub will be used by default
+  #       #install: # system flatpaks we want all users to have and not remove
+  #         #- org.mozilla.firefox
+  #         #- org.gnome.Loupe
+  #     - scope: user # Also add Flathub user repo, but no user packages
+  #       notify: true # Send notification after install/uninstall is finished (true/false)
+  #       repo:
+  #         #url: https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
+  #         url: file:///etc/flatpak-repos/flathub-mirror.flatpakrepo
+  #         name: flathub
+  #         title: Flathub (SJTUG Mirror)
+  #       install:
+  #         - com.ranfdev.DistroShelf # DistroShelf для управления Distrobox контейнерами
+  #         - org.jeffvli.feishin # аудио плеер под стриминг
+  #         - org.filezillaproject.Filezilla
+  #         - com.github.tchx84.Flatseal # Flatseal для управления разрешениями Flatpak
+  #         - it.mijorus.gearlever # Gear Lever для управления AppImages
+  #         - com.heroicgameslauncher.hgl # Heroic Games Launcher
+  #         - org.jellyfin.JellyfinDesktop
+  #         - io.github.DenysMb.Kontainer # Kontainer для управления Distrobox контейнерами
+  #         #- org.freedesktop.Platform.VulkanLayer.MangoHud # MangoHud для Flatpak версий лаунчеров (пакет не найден)
+  #         - io.missioncenter.MissionCenter # монитор ресурсов
+  #         - md.obsidian.Obsidian
+  #         #- io.github.peazip.PeaZip # альтернативный архиватор (если Ark не устроит)
+  #         - io.podman_desktop.PodmanDesktop
+  #         - com.vysp3r.ProtonPlus # ProtonPlus
+  #         - com.github.Matoking.protontricks # Protontricks
+  #         - net.davidotek.pupgui2 # ProtonUp-Qt (альтернатива ProtonPlus)
+  #         - io.github.martchus.syncthingtray
+  #         - org.telegram.desktop
+  #         #- org.freedesktop.Platform.VulkanLayer.vkBasalt # vkBasalt (для Flatpak версий лаунчеров) - аналог ReShade (пакет не найден)
+  #         - org.videolan.VLC
+  #         - io.github.flattool.Warehouse # Warehouse для управления Flatpak пакетами
 
-  - type: script
-    snippets:
-      - flatpak remote-add --system --if-not-exists flathub https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
-      - flatpak remote-modify --system flathub --url=https://mirror.sjtu.edu.cn/flathub
-      - flatpak remote-add --user --if-not-exists flathub https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
-      - flatpak remote-modify --user flathub --url=https://mirror.sjtu.edu.cn/flathub
+  # - type: script
+  #   snippets:
+  #     - flatpak remote-add --system --if-not-exists flathub https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
+  #     - flatpak remote-modify --system flathub --url=https://mirror.sjtu.edu.cn/flathub
+  #     - flatpak remote-add --user --if-not-exists flathub https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
+  #     - flatpak remote-modify --user flathub --url=https://mirror.sjtu.edu.cn/flathub
 
   # Включаем службу scx_loader
-  - type: systemd
-    system:
-      enabled:
-        - scx_loader.service
+  # - type: systemd
+  #   system:
+  #     enabled:
+  #       - scx_loader.service
 
   # не использовать вместе с sched-ext
   # Настройка ananicy-cpp (автозапуск)
@@ -203,6 +205,6 @@ modules:
   #     enabled:
   #       - ananicy-cpp.service
 
-  - type: brew # Homebrew
+  #- type: brew # Homebrew
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
